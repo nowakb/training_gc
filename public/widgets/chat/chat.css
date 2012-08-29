@@ -1,0 +1,17 @@
+.training_gc_chat div.chatLog {
+  border: 2px solid;
+  width: 200px;
+  height: 150px;
+  overflow: scroll;
+}
+
+.training_gc_chat span.received {
+  color: blue;
+  text-align: left;
+}
+
+.training_gc_chat span.sent {
+  color: red;
+  text-decoration: bold;
+  text-align: right;
+}
