@@ -20,8 +20,7 @@ feather.ns("training_gc");
           var idx = el.id.substring(el.id.indexOf("_") + 1);
           var gameName = games[idx].name;
 
-          alert("you want to join " + gameName);
-          
+          me.get("#joinedGame").html("This rocks! (that's the " + gameName + " for the doubters.)");
         });
       }
     }

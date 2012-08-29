@@ -3,4 +3,5 @@
 {{each(index, game) games}}
 	 <p> <input id="joinMe_${index}" type="button" value="Join ${game.name}" /> ${index + 1}: ${game.name} | (${game.currentlyWaiting} of ${game.numberOfPlayers}) | ${game.currentGames} </p>
 {{/each}}
-<label id="selectedGame" />
+<label id="joinedGame" />
+<!--<input id="updateStats" type="button" value="Update Stats" />-->
