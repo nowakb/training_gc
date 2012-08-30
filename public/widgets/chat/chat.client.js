@@ -10,13 +10,14 @@ feather.ns("training_gc");
       },
       onReady: function() {
         var me = this;
+        var chatRoom = me.options.chatRoom || "lobby";
         var myUsername = feather.util.qs.user || "joeschmoe";
         var chatChannel = feather.socket.subscribe({
-          id: "lobby", 
+          id: chatRoom, 
           data: {
             username: myUsername
           }
-        }); // TODO: "lobby" should be options based
+        });
 
         function sendText(){
           var text = me.get("#chatText").val();
