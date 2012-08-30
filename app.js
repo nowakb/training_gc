@@ -11,8 +11,10 @@ exports.onInit = function(feather, cb) {
 };
 
 
-/*
 exports.onReady = function(feather) {
 
+  if (feather.config('test')) {
+    var runTests = require('./lib/runTests');
+    runTests();
+  }
 };
-*/
