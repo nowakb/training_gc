@@ -9,10 +9,21 @@ feather.ns("training_gc");
       },
       onReady: function() {
         var me = this;
-        me.domEvents.bind(me.get("#join"), 'click', function() {
-            me.fire('join', me.options.game.name);
-        });
         
+        if (me.options && me.options.game) {
+          me.updateData(me.options.game)
+        }
+      },
+      updateData: function(g) {
+        var me = this;
+        
+        me.options.game = g;
+        me.container.empty();
+        $.tmpl(me.templates.lineItem, me).appendTo(me.container);
+        
+        me.domEvents.bind(me.get("#join"), "click", function() {
+            me.fire("join", me.options.game.name);
+        });  
       }
     }
   });
