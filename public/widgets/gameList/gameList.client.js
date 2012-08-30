@@ -19,6 +19,8 @@ var masterGames = [
 
 
 
+var updateGame = {guid: 1, name: "Hamburger", currentGames: 3, numberOfPlayers: 5, currentlyWaiting: 4};
+
 feather.ns("training_gc");
 (function() {
   training_gc.gameList = feather.Widget.create({
@@ -35,12 +37,11 @@ feather.ns("training_gc");
         function appendGameLine(g) {
           feather.Widget.load({
             path: 'widgets/gameLine/',
-            serverOptions: {
-              game: g
-            },
             clientOptions: {
               container: $("<div/>").appendTo(me.get("#gameLineItems")),
               game: g,
+              parent: me,
+              id: "gameLine" + g.guid,
               on: {
                 join: function(args) {
                     me.get("#joinedGame").html("<p>" + args + "</p>");
@@ -50,14 +51,25 @@ feather.ns("training_gc");
           });
         }
         
+        function updateGameLine(g) {
+          var gameLine = me.children && me.children.findById("gameLine" + g.guid);
+          if(gameLine) {
+            gameLine.updateData(g);
+          } else {
+            appendGameLine(g);
+          } 
+        }
+               
         for(var i=0; i<games.length; i++) {
-          appendGameLine(games[i]);
+          updateGameLine(games[i]);
         }
         
-        me.domEvents.bind(me.get("#updateStats"), 'click', function() {
-          
-          appendGameLine(newGame);
-          
+        me.domEvents.bind(me.get("#addnewgame"), 'click', function() {
+          updateGameLine(newGame);
+        });
+        
+        me.domEvents.bind(me.get("#updategame"), 'click', function() {
+          updateGameLine(updateGame);
         });
         
       }
