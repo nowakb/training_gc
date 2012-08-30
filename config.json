@@ -1,1 +1,16 @@
-{}
+{
+  "auth": {
+    "enabled": true,
+    "rules": {
+      "^/$": {
+        "loginRequired": true,
+        "redirectUrl": "/login"
+      },
+
+      "^/index.*": {
+        "loginRequired": true,
+        "redirectUrl": "/login"
+      }
+    }
+  }
+}
