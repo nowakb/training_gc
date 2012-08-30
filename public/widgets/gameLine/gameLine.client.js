@@ -10,8 +10,7 @@ feather.ns("training_gc");
       onReady: function() {
         var me = this;
         me.domEvents.bind(me.get("#join"), 'click', function() {
-            //alert(me.options.gamename);
-            me.fire('join', me.options.gamename);
+            me.fire('join', me.options.game.name);
         });
         
       }
