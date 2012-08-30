@@ -1,8 +1,6 @@
 feather.ns("training_gc");
 (function() {
 
-  var chatChannel = feather.socket.subscribe({id: "lobby"}); // TODO: options based
-
   training_gc.chat = feather.Widget.create({
     name: "training_gc.chat",
     path: "widgets/chat/",
@@ -12,11 +10,18 @@ feather.ns("training_gc");
       },
       onReady: function() {
         var me = this;
+        var myUsername = feather.util.qs.user || "joeschmoe";
+        var chatChannel = feather.socket.subscribe({
+          id: "lobby", 
+          data: {
+            username: myUsername
+          }
+        }); // TODO: "lobby" should be options based
 
         function sendText(){
           var text = me.get("#chatText").val();
-          chatChannel.send("message", {message: text});
-          appendToLog(text, "sent");
+          chatChannel.send("message", {message: text, username: myUsername});
+          appendToLog("Me: " + text, "sent");
           me.get("#chatText").val("");
         }
 
@@ -36,9 +41,20 @@ feather.ns("training_gc");
         });
 
         chatChannel.on("message", function(args) {
-          appendToLog(args.data.message, "received");
+          var user = args.data.username || "???";
+          var msg = user + ": " + args.data.message;
+          appendToLog(msg, "received");
         });
         
+        chatChannel.on("connection", function(args) {
+          var user = args.data.username || "???";
+          appendToLog("User Joined Chat: " + user, "alert");
+        });
+        
+        chatChannel.on("disconnection", function(args) {
+          var user = "???"; // TODO: Find out who disconnected
+          appendToLog("User Left Chat: " + user, "alert"); //+ args.data.username
+        });
       }
     }
   });

@@ -6,11 +6,20 @@
 }
 
 .training_gc_chat span.received {
+  width: 150px;
   color: blue;
   text-align: left;
 }
 
 .training_gc_chat span.sent {
+  width: 150px;
+  color: green;
+  text-decoration: bold;
+  text-align: right;
+}
+
+.training_gc_chat span.alert {
+  width: 150px;
   color: red;
   text-decoration: bold;
   text-align: right;
