@@ -4,6 +4,8 @@ var games = [
     {name: "Chess", currentGames: 43, numberOfPlayers: 2, currentlyWaiting: 1}
     ];
 
+var newGame = {name: "Magic", currentGames: 1, numberOfPlayers: 2, currentlyWaiting: 1};
+
 feather.ns("training_gc");
 (function() {
   training_gc.gameList = feather.Widget.create({
@@ -15,13 +17,44 @@ feather.ns("training_gc");
       },
       onReady: function() {
         var me = this;
-        me.domEvents.bind(me.get("input"), 'click', function() {
-          var el = this;
-          var idx = el.id.substring(el.id.indexOf("_") + 1);
-          var gameName = games[idx].name;
+        
+        me.domEvents.bind(me.get("#updateStats"), 'click', function() {
+          
+          var gameLine;
+          feather.Widget.load({
+            path: 'widgets/gameLine/',
+            serverOptions: {
+              gamename: "Magic",
+              gameindex: "5",
+              currentlyWaiting: "1",
+              numberOfPlayers: "2",
+              currentGames: "3",
+            },
+            
+            clientOptions: {
+              container: $("<div/>").appendTo(me.get("#gameLineItems")),
+              
+              gamename: "Magic",
+              gameindex: "5",
+              currentlyWaiting: "1",
+              numberOfPlayers: "2",
+              currentGames: "3",
 
-          me.get("#joinedGame").html("This rocks! (that's the " + gameName + " for the doubters.)");
+              onceState: {
+                ready: function() {
+                  gameLine = this;
+                  
+                  gameLine.on("join", function(args) {
+                    me.get("#joinedGame").html("<p>" + args + "</p>");
+                  });
+                  
+                }
+              }
+            }
+          });
+          
         });
+        
       }
     }
   });
