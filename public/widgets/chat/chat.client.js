@@ -12,6 +12,7 @@ feather.ns("training_gc");
         var me = this;
         var chatRoom = me.options.chatRoom || "lobby";
         var myUsername = feather.util.qs.user || "joeschmoe";
+        
         var chatChannel = feather.socket.subscribe({
           id: chatRoom, 
           data: {
@@ -27,7 +28,9 @@ feather.ns("training_gc");
         }
 
         function appendToLog(message, spanClass){
-          me.get("#chatLog").append("<span class=\"" + spanClass + "\">" + message + "</span><br/>");
+          var chatLog = me.get("#chatLog");
+          chatLog.append("<span class=\"" + spanClass + "\">" + message + "</span><br/>");
+          chatLog.scrollTop(chatLog.height());
         }
 
         //when one of my buttons is clicked, send a chat message on the chat channel

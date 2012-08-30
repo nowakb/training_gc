@@ -1,4 +1,3 @@
-var querystring = require("querystring");
 exports.getWidget = function(feather, cb) {
   cb(null, {
     name: "training_gc.chat",
