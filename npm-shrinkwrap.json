@@ -8,6 +8,9 @@
     "should": {
       "version": "1.1.0"
     },
+    "file": {
+      "version": "0.2.1"
+    },
     "mocha": {
       "version": "1.4.1",
       "dependencies": {
