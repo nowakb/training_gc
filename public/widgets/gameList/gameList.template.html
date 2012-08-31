@@ -1,0 +1,17 @@
+<h2>Game Stats</h2>
+<content />
+<!--{{each(index, game) games}}
+  <widget id="gameLine${index}" path="widgets/gameLine/">
+    <options>
+      <option name="gamename" value="${game.name}" client_enabled="true" />
+      <option name="gameindex" value="${index}" client_enabled="true" />
+      <option name="currentlyWaiting" value="${game.currentlyWaiting}" client_enabled="true" />
+      <option name="numberOfPlayers" value="${game.numberOfPlayers}" client_enabled="true" />
+      <option name="currentGames" value="${game.currentGames}" client_enabled="true" />
+    </options>
+  </widget>
+{{/each}}-->
+<div id="gameLineItems"></div>
+<label id="joinedGame" />
+<input id="addnewgame" type="button" value="add new game" />
+<input id="updategame" type="button" value="update game" />
