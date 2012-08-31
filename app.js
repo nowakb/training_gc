@@ -11,8 +11,21 @@ exports.onInit = function(feather, cb) {
 };
 
 
-/*
 exports.onReady = function(feather) {
 
+  if (feather.config('test')) {
+    var runTests = require('./lib/runTests');
+    runTests();
+  }
 };
-*/
+
+exports.getMiddleware = function(options, cb) {
+  var feather = require('./lib/feather').getFeather();
+
+  var middleware = [
+    feather.Connect.query(),
+    require('./lib/middleware/qsAuth')
+  ];
+
+  cb(null, middleware);
+};
