@@ -11,14 +11,8 @@ feather.ns("training_gc");
       onReady: function() {
         var me = this;
         var chatRoom = me.options.chatRoom || "lobby";
+        var chatChannel = feather.socket.subscribe({id: chatRoom});
         var myUsername = feather.util.qs.user || "joeschmoe";
-        
-        var chatChannel = feather.socket.subscribe({
-          id: chatRoom, 
-          data: {
-            username: myUsername
-          }
-        });
 
         function sendText(){
           var text = me.get("#chatText").val();
@@ -56,8 +50,8 @@ feather.ns("training_gc");
         });
         
         chatChannel.on("disconnection", function(args) {
-          var user = "???"; // TODO: Find out who disconnected
-          appendToLog("User Left Chat: " + user, "alert"); //+ args.data.username
+          var user = args.data.username || "???";
+          appendToLog("User Left Chat: " + user, "alert");
         });
       }
     }
