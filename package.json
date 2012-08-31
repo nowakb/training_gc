@@ -9,7 +9,8 @@
   },
   "devDependencies": {
     "mocha": "1.4.x",
-    "should": "1.1.x"
+    "should": "1.1.x",
+    "file": "0.2.1"
   },
   "description": "ZQ Training App: Game Center",
   "main": "app.js",
