@@ -16,7 +16,6 @@ feather.ns("training_gc");
       },
       updateData: function(g) {
         var me = this;
-        
         me.options.game = g;
         me.container.empty();
         $.tmpl(me.templates.lineItem, me).appendTo(me.container);
