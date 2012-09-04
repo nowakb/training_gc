@@ -17,5 +17,10 @@
         "redirectUrl": "/login"
       }
     }
+  },
+  "logging": {
+    "categories": {
+      "rest": "warn"
+    }
   }
 }
