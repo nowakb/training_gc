@@ -8,7 +8,7 @@ feather.ns("training_gc");
     prototype: {
       onInit: function() {
         var me = this;
-        me.games = [];
+        
       },
       onReady: function() {
         var me = this;
@@ -16,6 +16,15 @@ feather.ns("training_gc");
         var gameChannel = feather.socket.subscribe({id: "games"});
         var myUsername = feather.util.qs.user || "honeypotter";
 
+        $.ajax({
+          url: '/_rest/gameInfo/activeGames/',
+          dataType: "json",
+          success: function(data) {
+             for (var i = 0; i < data.length; i++) {
+              appendGameLine(data[i]);
+             }
+            }
+        });
         function appendGameLine(g) {
           feather.Widget.load({
             path: 'widgets/gameLine/',
@@ -26,8 +35,25 @@ feather.ns("training_gc");
               id: "gameLine" + g.guid,
               on: {
                 join: function(args) {
-                  var text = '{"action": "update", "guid": "' + g.guid + '", "currentlyWaiting": "' + (g.currentlyWaiting + 1) + '"}'
-                  gameChannel.send("message", {message: text, username: myUsername});;
+                  var stat = {};
+                  stat.guid = g.guid;
+                  stat.username = myUsername;
+                  $.ajax({
+                      url: "/_rest/gameInfo/join",
+                      type: "post",
+                      data: stat,
+                      success: function(response, textStatus, jqXHR){
+                          feather.logger.debug("Hooray, it worked!");
+                      },
+                      error: function(jqXHR, textStatus, errorThrown){
+                          feather.logger.error(
+                              "The following error occured: "+
+                              textStatus, errorThrown
+                          );
+                      },
+                      complete: function(){
+                      }
+                  });
                 }
               }
             }
@@ -38,9 +64,6 @@ feather.ns("training_gc");
           var gameLine = me.children && me.children.findById("gameLine" + g.guid);
 
           if(gameLine) {
-              g.name = gameLine.options.game.name;
-              g.minNumberOfPlayers = gameLine.options.game.minNumberOfPlayers;
-              g.maxNumberOfPlayers = gameLine.options.game.maxNumberOfPlayers;
               gameLine.updateData(g);
             
           } else {
@@ -58,7 +81,7 @@ feather.ns("training_gc");
         }
 
         gameChannel.on("stats", function(args) {
-          debugger;
+          //debugger;
 
           if (args.data.action == "new")
             appendGameLine(args.data);

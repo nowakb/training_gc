@@ -14,10 +14,34 @@ feather.ns("training_gc");
         var myUsername = feather.util.qs.user || "honeypotter";
 
         me.domEvents.bind(me.get('#sendstats'), 'click', function() {
-          debugger;
+          //debugger;
           var text = me.get('#statinput').val();
           var stat = JSON.parse(text);
-          gameChannel.send('stats', stat);
+          stat.username = myUsername;
+          $.ajax({
+              url: "/_rest/gameInfo/addNew",
+              type: "post",
+              data: stat,
+              // callback handler that will be called on success
+              success: function(response, textStatus, jqXHR){
+                  // log a message to the console
+                  feather.logger.debug("Hooray, it worked!");
+              },
+              // callback handler that will be called on error
+              error: function(jqXHR, textStatus, errorThrown){
+                  // log the error to the console
+                  feather.logger.error(
+                      "The following error occured: "+
+                      textStatus, errorThrown
+                  );
+              },
+              // callback handler that will be called on completion
+              // which means, either on success or error
+              complete: function(){
+                  // enable the inputs
+                  //$inputs.removeAttr("disabled");
+              }
+          });
         });
       }
     }
