@@ -1,10 +1,20 @@
 
-<label class="greeting">Welcome</label>
-<span id="username" class="username"></span>
+<template name="profileinfo" class="profile" client_enabled="true">
 
+  <label class="greeting">Welcome</label>
+  <span class="handle">$[profile.firstname]</span>
 
-<template name="onlineStatus" client_enabled="true">
-  Welcome $[options.userName]
+  <div class="stats">
+    <label>Rank</label>
+    <span>$[stats.rank]</span>
+
+    <label>Last Game</label>
+    <span>$[stats.lastgame]</span>
+
+    <label>Games Played</label>
+    <span>$[stats.totalgamesplayed]</span>
+  </div>
+
 </template>
 
-<div id="statusline"></div>
+<div id="profiledisplay"/>

@@ -1,0 +1,33 @@
+body{
+  font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+  font-size:12px;
+  border:0; 
+  margin:0; 
+  padding:0;
+}
+
+.profile{
+  margin:0 auto;
+  width:400px;
+  padding:14px;
+}
+
+
+.stats{
+    margin:20px;
+}
+
+.stats label{
+  display:block;
+  font-weight:bold;
+  text-align:right;
+  width:100px;
+  float:left;
+}
+
+.stats span{
+  float:left;
+  font-size:12px;
+  padding-left:20px;
+  width:100px;
+}

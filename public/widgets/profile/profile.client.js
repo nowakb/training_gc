@@ -1,3 +1,5 @@
+
+
 feather.ns("training_gc");
 (function() {
   training_gc.profile = feather.Widget.create({
@@ -10,14 +12,24 @@ feather.ns("training_gc");
       onReady: function() {
         var me = this;
 
-          me.get('#username').html("brad");
+        me.server_getUserInfo(function(args) {
 
-        //  me.options.userName = "brad";
-        //  $.tmpl(me.templates.onlineStatus, me).appendTo(me.get('#statusline'));
+          if (args.success) {
+
+            $.tmpl(me.templates.profileinfo, args.result).appendTo(me.get('#profiledisplay'));
 
 
-        //make sure the form is datalinked
-        //  me.datalink();
+            me.get('#username').html(args.result.profile.firstname);
+            me.get('#rank').html(args.result.stats.rank);
+          } else {
+            me.get('#username').html("Player");
+          }
+        });
+      },
+      addActivity: function(activity) {
+        var me = this;
+
+
       }
     }
   });
