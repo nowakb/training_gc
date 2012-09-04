@@ -1,18 +1,19 @@
 var masterGames = [ 
-    {name: "Ninja", numberOfPlayers: 1},
-    {name: "Hamburger", numberOfPlayers: 4}, 
-    {name: "Chess", numberOfPlayers: 2},
-    {name: "Monster Bowling", numberOfPlayers: 4},
-    {name: "End Runner", numberOfPlayers: 8},
-    {name: "Monitor Throwing", numberOfPlayers: 10},
-    {name: "Grocery Bagger", numberOfPlayers: 3},
-    {name: "Bug Squash", numberOfPlayers: 5},
-    {name: "Sally Says", numberOfPlayers: 10},
-    {name: "Alien Masher", numberOfPlayers: 2},
-    {name: "Magic", numberOfPlayers: 6},
-    {name: "Fruit Ninja", numberOfPlayers:  4},
-    {name: "Dance Party", numberOfPlayers: 8},
-    {name: "Sing Snap", numberOfPlayers: 25}
+    {guid: 0, name: "Ninja", minNumberOfPlayers: 1, maxNumberOfPlayers: 1},
+    {guid: 1, name: "Hamburger", minNumberOfPlayers: 1, maxNumberOfPlayers: 4}, 
+    {guid: 2, name: "Chess", minNumberOfPlayers: 2, maxNumberOfPlayers: 2},
+    {guid: 3, name: "Monster Bowling", minNumberOfPlayers: 2, maxNumberOfPlayers: 6},
+    {guid: 4, name: "End Runner", minNumberOfPlayers: 3, maxNumberOfPlayers: 10},
+    {guid: 5, name: "Monitor Throwing", minNumberOfPlayers: 2, maxNumberOfPlayers: 10},
+    {guid: 6, name: "Grocery Bagger", minNumberOfPlayers: 2, maxNumberOfPlayers: 4},
+    {guid: 7, name: "Bug Squash", minNumberOfPlayers: 1, maxNumberOfPlayers: 0},
+    {guid: 8, name: "Sally Says", minNumberOfPlayers: 3, maxNumberOfPlayers: 0},
+    {guid: 9, name: "Alien Masher", minNumberOfPlayers: 2, maxNumberOfPlayers: 4},
+    {guid: 10, name: "Magic", minNumberOfPlayers: 6, maxNumberOfPlayers: 6},
+    {guid: 11, name: "Fruit Ninja", minNumberOfPlayers:  1, maxNumberOfPlayers: 4},
+    {guid: 12, name: "Dance Party", minNumberOfPlayers: 2, maxNumberOfPlayers: 10},
+    {guid: 13, name: "Sing Snap", minNumberOfPlayers: 1, maxNumberOfPlayers: 0},
+    {guid: 14, name: "Crates and Barrels", minNumberOfPlayers: 1, maxNumberOfPlayers: 1}
     ];
 
 feather.ns("training_gc");
@@ -69,6 +70,7 @@ feather.ns("training_gc");
         }
         
         me.domEvents.bind(me.get("#addnewgame"), 'click', function() {
+          debugger;
           addNewGames(me.games, 1);
           updateGameLine(me.games[me.games.length - 1]);
         });
@@ -115,17 +117,11 @@ function getMockGameData(games, addCount) {
     // update stats on current games
     for (i = 0; i < games.length; i++) {
       var g = games[i];
-      var waiting = getCurrentlyPlaying(g.numberOfPlayers + 1);
+      var waiting = getCurrentlyPlaying(g.maxNumberOfPlayers + 1);
       if (waiting == g.numberOfPlayers)
         g.DeleteMe = true;
       g.currentlyWaiting = waiting;
     }
-
-    //     // remove games
-    //  for (i = 0; i < countRemove; i++) {
-    //    var k = randomFromTo(0, games.length - 1);
-    //    games[k].DeleteMe = true;
-    // }
 
     // add new games
     addNewGames(games, countAdd);
@@ -160,10 +156,10 @@ function addNewGames(games, addCount) {
 
     var game = masterGames[k];
     game.guid = k;
-    var waiting = getCurrentlyPlaying(game.numberOfPlayers);
+    var waiting = getCurrentlyPlaying(game.maxNumberOfPlayers);
 
     game.currentlyWaiting = waiting;
-    if (waiting < game.numberOfPlayers)
+    if (waiting < game.maxNumberOfPlayers)
       games.push(game);
   }
 
