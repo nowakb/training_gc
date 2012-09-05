@@ -1,0 +1,17 @@
+.training_gc_gameList div.gameList {
+  border: 2px solid;
+  width: 250px;
+  height: 150px;
+  overflow: scroll;
+}
+
+.training_gc_gameList span.gameItemInactive {
+  color: blue;
+  text-align: left;
+}
+
+.training_gc_gameList span.gameItemActive {
+  color: green;
+  text-decoration: bold;
+  text-align: left;
+}
