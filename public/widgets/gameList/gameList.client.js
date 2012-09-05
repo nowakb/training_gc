@@ -90,6 +90,10 @@ feather.ns("training_gc");
           if (args.data.action == "update")
             updateGameLine(args.data);
         });
+
+        gameChannel.on("notify", function(args) {
+          feather.alert('Message from Game Center', args.data);
+        });
       }
     }
   });
