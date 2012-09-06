@@ -1,8 +1,7 @@
 {
   "socket.io": {
     "enabled": true,
-    "host": "localhost",
-    "port": "8081"
+    "host": "localhost"
   },
   "auth": {
     "enabled": true,
