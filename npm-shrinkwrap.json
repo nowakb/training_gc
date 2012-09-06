@@ -11,6 +11,9 @@
     "file": {
       "version": "0.2.1"
     },
+    "inherits": {
+      "version": "1.0.0"
+    },
     "should": {
       "version": "1.1.0"
     },
