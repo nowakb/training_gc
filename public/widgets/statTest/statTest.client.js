@@ -1,4 +1,5 @@
 feather.ns("training_gc");
+
 (function() {
   training_gc.statTest = feather.Widget.create({
     name: "training_gc.statTest",
@@ -14,7 +15,23 @@ feather.ns("training_gc");
         me.domEvents.bind(me.get('#add'), 'click', function() {
           var text = me.get('#statinput').val();
           var stat = JSON.parse(text);
-          gameChannel.send('add', stat);
+          $.ajax({
+            url: "/_rest/gameInfo/addNew",
+            type: "post",
+            data: stat,
+            success: function(response, textStatus, jqXHR){
+                //feather.logger.debug("");
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                feather.logger.error(
+                    "The following error occured: "+
+                    textStatus, errorThrown
+                );
+            },
+            complete: function(){
+            }
+        });
+          //gameChannel.send('add', stat);
         });
         
         me.domEvents.bind(me.get('#update'), 'click', function() {

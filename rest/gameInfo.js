@@ -1,5 +1,6 @@
 var uuid = require('node-uuid/uuid');
 var _ = require('underscore');
+var activeGames = require('../lib/data/activeGames');
 
 var masterGames = [ 
    {id: 0, name: "Ninja", minNumberOfPlayers: 1, maxNumberOfPlayers: 1},
@@ -42,13 +43,7 @@ module.exports = {
       debugger;
 
       feather.logger.warn({category: 'rest', message: req.body.username + ' is launching a new ' + req.body.name});
-      var id = uuid.v1();
-      req.body.guid = id;
-      req.body.users = [req.body.username];
-      req.body.currentlyWaiting = 1;      
-      activeGames.push(req.body);
-      var game = _.extend(_.clone(req.body), {action: "new"});
-      training.api.channels.statsChannel.sendMessage('stats', game);
+      var game = activeGames.add(req.body);
       cb(null, game);
     },
     "/join": function(req, res, cb) {
@@ -83,7 +78,7 @@ module.exports = {
     },
     "/leave": function(req, res, cb) {
       
-    }
+    },
     "/remove": function(req, res, cb) {
       debugger;
       feather.logger.warn({category: 'rest', message: 'The game ' + req.body.game.guid + ' has been removed from stats'});
@@ -95,7 +90,8 @@ module.exports = {
           break;
         }
       }
+          cb(null, game);
     }
-    cb(null, )
+
   }
 };
