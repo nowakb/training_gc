@@ -81,6 +81,9 @@ module.exports = {
 
       cb(null, game);
     },
+    "/leave": function(req, res, cb) {
+      
+    }
     "/remove": function(req, res, cb) {
       debugger;
       feather.logger.warn({category: 'rest', message: 'The game ' + req.body.game.guid + ' has been removed from stats'});
