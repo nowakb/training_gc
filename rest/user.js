@@ -30,15 +30,19 @@ function getUserData(userkey, cb) {
   var result = null,
     err = null;
 
-  // walk the store object to find the requested data element
-  try {
-    if (typeof users === "undefined") throw new Error('No datasource found');
-
+  if (typeof users === "undefined") {
+    err = { message: 'No datasource found' };
+  }
+  else if (typeof userkey === "undefined") {
+    err = { message: 'User key was not provided' };
+  }
+  else {
+    // Try to retrieve user
     result = users[userkey];
-    if (typeof result === "undefined") throw new Error('User not found');
 
-  } catch (ex) {
-    err = "Data not found";
+    if (typeof result === "undefined") {
+      err = { message: 'User "' + userkey + '" not found' };
+    }
   }
 
   cb(err, result);
@@ -64,14 +68,14 @@ module.exports = {
         getUserData(userName, function(err2, user){
 
           // Set some defaults
-          if (!user.profile) user.profile = {};
-          if (!user.stats) user.stats = {};
+          if (user && !user.profile) user.profile = {};
+          if (user && !user.stats) user.stats = {};
 
           if (!err1) cb(err2, user);        
         });
 
       } catch (ex) {
-        err1 = 'Error in _rest/user/:username/ ==> ' + ex;
+        err1 = 'Error in _rest/user/:username/ ==> ' + ex.toString();
         cb(err1);
       }
 
