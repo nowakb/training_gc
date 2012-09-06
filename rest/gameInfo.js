@@ -49,6 +49,7 @@ module.exports = {
       activeGames.push(req.body);
       var game = _.extend(_.clone(req.body), {action: "new"});
       training.api.channels.statsChannel.sendMessage('stats', game);
+      cb(null, game);
     },
     "/join": function(req, res, cb) {
       debugger;
@@ -70,23 +71,28 @@ module.exports = {
           } else {
             training.api.channels.statsChannel.sendMessage('notify', "You have already joined this game.");
           }
+
           break;
         }
       };
       if (game == undefined) {
         training.api.channels.statsChannel.sendMessage('notify', "That game is no longer open for new players.");
       }
+
+      cb(null, game);
     },
     "/remove": function(req, res, cb) {
       debugger;
       feather.logger.warn({category: 'rest', message: 'The game ' + req.body.game.guid + ' has been removed from stats'});
       for (var i = 0; i < activeGames.length; i++) {
         if (req.body.guid == activeGames[i].guid) {
-          activeGames[i].action = "pau";
-          training.api.channels.statsChannel.sendMessage('stats', activeGames[i]);
+          var game = activeGames[i];
+          game.action = "pau";
+          training.api.channels.statsChannel.sendMessage('stats', game);
           break;
         }
       }
     }
+    cb(null, )
   }
 };
