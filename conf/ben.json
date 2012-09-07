@@ -1,0 +1,10 @@
+{
+  "socket.io": {
+    "host": "benvm"
+  },
+  "logging": {
+    "categories": {
+      "http.access": "off"
+    }
+  }
+}

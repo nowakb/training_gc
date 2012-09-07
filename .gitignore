@@ -1,3 +1,9 @@
+
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+
 lib-cov
 *.seed
 *.log
@@ -16,3 +22,5 @@ npm-debug.log
 
 conf/brad.json
 public/feather-res-cache
+
+
