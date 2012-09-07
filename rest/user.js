@@ -2,26 +2,23 @@ var feather = require('../lib/feather').getFeather();
 
 var users = {
   nowakb : {
-    profile: {
-      firstname: "bradley",
-      lastname: "nowak",
+      profile: {
+        firstName: "brad",
+        lastName: "nowak",
+        avatarURL: ""
+      },
+      stats: {
+        experiencePoints: 15322
+      }
     },
-    stats: {
-      rank: "Private",
-      lastgame: "Astroids",
-      totalgamesplayed: "29"
-
-    }
-  },
   ryedin: {
     profile: {
-      firstname: "ryan",
-      lastname: "gahl",
+      firstName: "ryan",
+      lastName: "gahl",
+      avatarURL: ""
     },
     stats: {
-      rank: "Captain",
-      lastgame: "Seaquest",
-      totalgamesplayed: "1204"
+      experiencePoints: 938235
     }
   }
 };
