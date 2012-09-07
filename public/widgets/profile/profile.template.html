@@ -1,21 +1,21 @@
-
 <template name="userinfo" class="profile" client_enabled="true">
 
-  <label class="greeting">Welcome</label>
-  <span class="handle">$[profile.firstname]</span>
+  <div  class="hero-unit">
 
-  <div class="stats">
-    <label>Rank</label>
-    <span>$[stats.rank]</span>
+    <h1 class="greeting">Welcome, $[profile.firstname]</h1>
 
-    <label>Last Game</label>
-    <span>$[stats.lastgame]</span>
+    <p>
+      <p class="stat">Experience: $[stats.rank]</p>
+      <p class="stat">Last Game: $[stats.lastgame]</p>
+      <p class="stat">Games Played: $[stats.totalgamesplayed]</p>
+    </p>
 
-    <label>Games Played</label>
-    <span>$[stats.totalgamesplayed]</span>
   </div>
 
 </template>
 
-<div id="userdisplay"/>
+
+
+<div id="userdisplay" style="padding:20px"/>
+
 
